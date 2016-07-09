@@ -23,7 +23,7 @@ while [ $# -gt 0 ] ; do
 		mv $PBF $PBFIMPORT
 		;;
 	import)
-		osm2pgsql --number-processes 3 --cache 4000 -j -G --slim --latlong --drop -H localhost -U osm $PBFIMPORT
+		osm2pgsql --number-processes 3 --cache 2000 -j -G --slim --latlong --drop -H localhost -U osm $PBFIMPORT
 		;;
 	select)
 		psql gis osm -c "select * from planet_osm_point where name='Montpellier' ;"
