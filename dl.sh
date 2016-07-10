@@ -32,7 +32,7 @@ while [ $# -gt 0 ] ; do
 		psql gis osm
 		;;
 	*)
-		echo "$0 dl|import|select|psql"
+		echo "$0 dl|dl-france|dl-europe|import|select|psql"
 		;;
 	esac
 
