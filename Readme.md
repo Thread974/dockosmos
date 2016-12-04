@@ -2,6 +2,10 @@
 Dockerfile for creating postgresql database and import europe
 ==================
 
+Download and Import OpenStreetMap file into PostgresQL which is then available for query
+Can be customized after cloning
+See ./_test.sh to build and run the resulting image
+
 Special task involved
 ------------------
 
