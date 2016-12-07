@@ -1,5 +1,4 @@
 #!/bin/sh
-
 set -e
 
 [ -z "$OSM_ROOT_DIR" ] && OSM_ROOT_DIR=.
@@ -14,23 +13,27 @@ while [ $# -gt 0 ] ; do
 	case $1 in
 	dl)
 		PBF=languedoc-roussillon-latest.osm.pbf
-		wget http://download.geofabrik.de/europe/france/$PBF
-		mv $PBF $PBFIMPORT
+		[ -r $PBF ] || wget http://download.geofabrik.de/europe/france/$PBF
+		rm -f $PBFIMPORT
+		ln $PBF $PBFIMPORT
 		;;
 	dl-france)
 		PBF=france-latest.osm.pbf
-		wget http://download.geofabrik.de/europe/$PBF
-		mv $PBF $PBFIMPORT
+		[ -r $PBF ] || wget http://download.geofabrik.de/europe/$PBF
+		rm -f $PBFIMPORT
+		ln $PBF $PBFIMPORT
 		;;
 	dl-europe)
 		PBF=europe-latest.osm.pbf
-		wget http://download.geofabrik.de/$PBF
-		mv $PBF $PBFIMPORT
+		[ -r $PBF ] || wget http://download.geofabrik.de/$PBF
+		rm -f $PBFIMPORT
+		ln $PBF $PBFIMPORT
 		;;
 	dl-planet)
 		PBF=planet-latest.osm.pbf
-		wget http://mirror2.shellbot.com/osm/$PBF
-		mv $PBF $PBFIMPORT
+		[ -r $PBF ] || wget http://mirror2.shellbot.com/osm/$PBF
+		rm -f $PBFIMPORT
+		ln $PBF $PBFIMPORT
 		;;
 	import)
 		osm2pgsql --number-processes 3 --cache 2000 -j -G --slim --latlong --drop -H localhost -U osm $PBFIMPORT
@@ -48,3 +51,4 @@ while [ $# -gt 0 ] ; do
 
 	shift
 done
+
